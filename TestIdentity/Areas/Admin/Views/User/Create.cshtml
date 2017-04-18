@@ -1,0 +1,59 @@
+﻿@model TestIdentity.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+            <div>
+                @Html.EditorFor(model => model.Email, new { HtmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new { @class = "control-label" })
+            <div>
+                @Html.EditorFor(model => model.Password, new { HtmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label" })
+            <div>
+                @Html.EditorFor(model => model.ConfirmPassword, new { HtmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">群組</label>
+            <span class="requiredPrompt">*</span>
+            <div>
+                @foreach (var item in ViewBag.UserInRoles)
+                {
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="SelectedRole" value="@item.Value" @(item.Selected ? "checked='checked'" : "")>
+                            @item.Text
+                        </label>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn btn-primary" type="submit"><i class="fa fa-check-circle"></i>&nbsp;新增</button>
+            <button type="button" data-closelightbox="true" class="btn btn-warning"><i class="fa fa-reply-all"></i>&nbsp;取消</button>
+        </div>
+
+    </div>
+}

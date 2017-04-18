@@ -1,0 +1,72 @@
+﻿@model IList<TestIdentity.Models.ApplicationUser>
+@{
+    ViewBag.Title = "User 管理";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User 管理</h2>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box">
+            <div class="box-header">
+                <h2><span class="break"></span>帳號</h2>
+                <div class="box-icon">
+                    <a href="@Url.Action("Create")"  class="text-primary" title="新增">&nbsp;單筆新增</a>
+                </div>
+            </div>
+            <div class="box-content" id="table_content">
+                <table data-fix class="table table-bordered table-striped table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th>
+                                帳號
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().PhoneNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().Email)
+                            </th>
+                            <th>
+                                群組
+                            </th>
+                            <th>
+                                鎖定
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @(((Dictionary<string, string>)ViewData["roleCollection"])[item.Id])
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LockoutEnabled)
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-default btn-xs"  href="@Url.Action("EditPassword", new { id = item.Id })">密</a>
+                                    <a class="btn btn-default btn-xs" href="@Url.Action("Edit", new { id = item.Id })">修</a>
+                                    <a class="btn btn-danger btn-xs" href="@Url.Action("Delete", new { id = item.Id })">刪</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

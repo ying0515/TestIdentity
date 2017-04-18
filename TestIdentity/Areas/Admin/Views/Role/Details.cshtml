@@ -1,0 +1,36 @@
+﻿@model  ICollection<Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole>
+@{
+    ViewBag.Title = "Role 管理";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().RoleId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().UserId)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+
+        </tr>
+    }
+
+</table>
