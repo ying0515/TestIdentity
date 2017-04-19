@@ -35,7 +35,7 @@ namespace TestIdentity
         {
             // 將您的 SMS 服務外掛到這裡以傳送簡訊。
             var sms = new SmsKing.ShortMessageService(
-                "ying0515", "******");
+                "ying0515", "******");  
             sms.SendMessage(SmsKing.EnumClass.ApiType.realTime, message.Destination, message.Body, null, null);
 
             return Task.FromResult(0);
@@ -68,6 +68,7 @@ namespace TestIdentity
                 RequireDigit = true,
                 RequireLowercase = true,
                 RequireUppercase = false,
+
             };
 
             // 設定使用者鎖定詳細資料
